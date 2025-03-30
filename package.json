@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.0.0",
   "private": true,
-  "homepage": "https://0xkhush.github.io/you-blog/",
+  "homepage": "https://0xkhush.github.io/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
