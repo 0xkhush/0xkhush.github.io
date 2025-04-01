@@ -134,7 +134,7 @@ function App() {
       {/* Footer */}
       <footer className="bg-white shadow-sm mt-12">
         <div className="container mx-auto px-4 py-6">
-          <p className="text-center text-gray-600">© 2023 Khushvendra's Blog. All rights reserved.</p>
+          <p className="text-left text-gray-600">© Designed & Developed by Khushvendra</p>
         </div>
       </footer>
     </div>
