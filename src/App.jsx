@@ -134,12 +134,12 @@ function App() {
           <h2 className="text-2xl font-semibold mb-6 text-gray-800">Latest Posts</h2>
           <BlogPost 
             title="Why I Love Coding in VS Code and Zed"
-            date="October 1, 2023"
+            date="October 1, 2024"
             excerpt="Exploring the features that make VS Code and Zed my favorite code editors and how they boost my productivity."
           />
           <BlogPost 
             title="Python vs C: When to Use Each"
-            date="September 25, 2023"
+            date="September 25, 2024"
             excerpt="My experience with both languages and how I choose between them for different projects."
           />
         </section>
