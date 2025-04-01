@@ -75,21 +75,22 @@ function App() {
             I believe in the power of coding to transform ideas into reality and enjoy sharing my journey 
             through this blog. My dedication to coding is matched only by my enthusiasm for anime and 
             discovering new ways to enhance my development workflow.
-          </p>
+            </p>
           
           {/* Social Links */}
           <div className="flex gap-4 mt-6">
-            <a href="#" className="text-gray-600 hover:text-blue-600 transition-colors">
+            <a href="https://github.com/0xkhush" className="text-gray-600 hover:text-blue-600 transition-colors" target="_blank" rel="noopener noreferrer">
               <Github className="w-6 h-6" />
             </a>
-            <a href="#" className="text-gray-600 hover:text-blue-600 transition-colors">
+            <a href="https://linkedin.com/in/khushvendra-singh" className="text-gray-600 hover:text-blue-600 transition-colors" target="_blank" rel="noopener noreferrer">
               <Linkedin className="w-6 h-6" />
             </a>
-            <a href="#" className="text-gray-600 hover:text-blue-600 transition-colors">
+            <a href="mailto:0xkhush@gmail.com" className="text-gray-600 hover:text-blue-600 transition-colors">
               <Mail className="w-6 h-6" />
             </a>
           </div>
-        </motion.section>
+          </motion.section>
+          
 
         {/* Favorites Section */}
         <motion.section 
