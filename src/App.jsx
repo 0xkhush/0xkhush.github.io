@@ -118,13 +118,13 @@ function App() {
               icon={<Cpu className="w-6 h-6 text-blue-500" />}
               title="Programming Languages"
               description="My preferred languages for bringing ideas to life"
-              details={["Python", "C"]}
+              details={["Python", "C","C++"]}
             />
             <FavoriteItem 
               icon={<Zap className="w-6 h-6 text-yellow-500" />}
               title="Current Learning Goals"
               description="Always expanding my knowledge in different areas of programming"
-              details={["Advanced Python", "System Programming in C"]}
+              details={["Advanced Python", "System Programming in C++","Data Structures and Algorithms"]}
             />
           </div>
         </motion.section>
@@ -136,11 +136,6 @@ function App() {
             title="Why I Love Coding in VS Code and Zed"
             date="October 1, 2023"
             excerpt="Exploring the features that make VS Code and Zed my favorite code editors and how they boost my productivity."
-          />
-          <BlogPost 
-            title="Naruto vs One Punch Man: My Take on These Anime Classics"
-            date="September 28, 2023"
-            excerpt="Discussing what makes these two anime series special and why they're my favorites."
           />
           <BlogPost 
             title="Python vs C: When to Use Each"
