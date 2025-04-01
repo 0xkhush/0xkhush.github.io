@@ -133,13 +133,16 @@ function App() {
 
       {/* Footer */}
       <footer className="bg-white shadow-sm mt-12">
-        <div className="container mx-auto px-4 py-6">
-          <p className="text-left text-gray-600">© Designed & Developed by Khushvendra</p>
-          <p className="text-right text-gray-600">Contact me </p>
-          <a  href="mailto:0xkhush@gmail.com" className="text-right text-gray-600 hover:text-blue-600 transition-colors">
-          <Mail className="w-6 h-6" /></a>
-        </div>
-      </footer>
+  <div className="container mx-auto px-4 py-6">
+    <div className="flex justify-between items-center">
+      <p className="text-left text-gray-600">© Designed & Developed by Khushvendra</p>
+      <a href="mailto:0xkhush@gmail.com" className="text-gray-600 hover:text-blue-600 transition-colors flex items-center">
+        <Mail className="w-6 h-6 mr-2" />
+        Contact me
+      </a>
+    </div>
+  </div>
+</footer>
     </div>
   );
 }
