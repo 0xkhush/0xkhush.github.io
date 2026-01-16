@@ -250,7 +250,9 @@ function App() {
               <motion.a
                 whileHover={{ scale: 1.2, rotate: 5 }}
                 whileTap={{ scale: 0.9 }}
-                href="#"
+                href="https://github.com/0xkhush"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="p-4 bg-gradient-to-br from-gray-700 to-gray-900 text-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 group"
               >
                 <Github className="w-6 h-6 group-hover:scale-110 transition-transform" />
@@ -258,7 +260,9 @@ function App() {
               <motion.a
                 whileHover={{ scale: 1.2, rotate: -5 }}
                 whileTap={{ scale: 0.9 }}
-                href="#"
+                href="https://www.linkedin.com/in/khushvendra-singh/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="p-4 bg-gradient-to-br from-blue-500 to-blue-700 text-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 group"
               >
                 <Linkedin className="w-6 h-6 group-hover:scale-110 transition-transform" />
@@ -266,7 +270,7 @@ function App() {
               <motion.a
                 whileHover={{ scale: 1.2, rotate: 5 }}
                 whileTap={{ scale: 0.9 }}
-                href="#"
+                href="mailto:0xkhush@gmail.com"
                 className="p-4 bg-gradient-to-br from-purple-500 to-pink-500 text-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 group"
               >
                 <Mail className="w-6 h-6 group-hover:scale-110 transition-transform" />
