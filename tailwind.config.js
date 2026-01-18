@@ -50,6 +50,13 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Hacker theme colors
+        "hacker-green": "#00ff00",
+        "hacker-cyan": "#00ffff",
+        "hacker-red": "#ff0000",
+        "hacker-bg": "#000000",
+        "hacker-dark": "#0a0a0a",
+        "hacker-gray": "#1a1a1a",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -85,6 +92,26 @@ module.exports = {
           "0%": { opacity: "0", transform: "translateY(30px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
+        glitch: {
+          "0%": { transform: "translate(0)" },
+          "20%": { transform: "translate(-2px, 2px)" },
+          "40%": { transform: "translate(-2px, -2px)" },
+          "60%": { transform: "translate(2px, 2px)" },
+          "80%": { transform: "translate(2px, -2px)" },
+          "100%": { transform: "translate(0)" },
+        },
+        blink: {
+          "0%, 50%": { opacity: "1" },
+          "51%, 100%": { opacity: "0" },
+        },
+        matrixFall: {
+          "0%": { transform: "translateY(-100%)", opacity: "1" },
+          "100%": { transform: "translateY(100vh)", opacity: "0" },
+        },
+        scanline: {
+          "0%": { transform: "translateY(-100%)" },
+          "100%": { transform: "translateY(100%)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -94,6 +121,10 @@ module.exports = {
         glow: "glow 2s ease-in-out infinite",
         shimmer: "shimmer 2s infinite",
         fadeInUp: "fadeInUp 0.6s ease-out",
+        glitch: "glitch 0.3s infinite",
+        blink: "blink 1s step-start infinite",
+        matrixFall: "matrixFall 10s linear infinite",
+        scanline: "scanline 4s linear infinite",
       },
     },
   },
