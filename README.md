@@ -2,7 +2,7 @@
 
 Personal portfolio website of **0xkhush** (Khushvendra Singh) — a software developer focused on backend development, DSA, and open-source.
 
-🌐 **Live:** [0xkhush.github.io](https://0xkhush.github.io)
+🌐 **Live:** [0xkhush.in](https://0xkhush.github.io)
 
 ---
 
