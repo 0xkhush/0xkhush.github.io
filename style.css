@@ -419,101 +419,70 @@ img {
     box-shadow: var(--shadow-glow);
 }
 
-/* Avatar */
+/* Avatar / Code Window */
 .hero-visual {
-    position: relative;
     display: flex;
     justify-content: center;
-    align-items: center;
 }
 
-/* Code Card */
-.code-card {
-    background: linear-gradient(145deg, #1a1a2e 0%, #16162a 100%);
-    border-radius: var(--radius-lg);
+.code-window {
+    background: #020617;
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 60px rgba(99, 102, 241, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    min-width: 380px;
-    max-width: 420px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(51, 65, 85, 0.8);
+    max-width: 450px;
+    width: 100%;
 }
 
-.code-card-header {
+.code-header {
+    background: #1e293b;
+    padding: 12px 15px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 14px 20px;
-    background: rgba(0, 0, 0, 0.3);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.window-controls {
-    display: flex;
     gap: 8px;
 }
 
-.control {
+.code-dot {
     width: 12px;
     height: 12px;
     border-radius: 50%;
 }
 
-.control-red {
-    background: #ff5f57;
-}
+.code-dot.red { background: #ef4444; }
+.code-dot.yellow { background: #eab308; }
+.code-dot.green { background: #22c55e; }
 
-.control-yellow {
-    background: #febc2e;
-}
-
-.control-green {
-    background: #28c840;
-}
-
-.code-filename {
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
+.code-title {
+    margin-left: auto;
+    font-size: 0.8rem;
     color: var(--text-muted);
-    font-weight: 500;
-}
-
-.code-card-body {
-    padding: 28px 24px;
-}
-
-.code-card-body pre {
-    margin: 0;
     font-family: var(--font-mono);
-    font-size: 0.95rem;
-    line-height: 1.8;
-    white-space: pre;
 }
 
-.code-card-body code {
+.code-body {
+    padding: 25px;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    line-height: 1.9;
+    overflow-x: auto;
+}
+
+.code-body pre {
+    margin: 0;
+}
+
+.code-body code {
     font-family: inherit;
 }
 
-.code-keyword {
-    color: #c678dd;
-    font-weight: 500;
-}
-
-.code-type {
-    color: #e5c07b;
-}
-
-.code-field {
-    color: #e06c75;
-}
-
-.code-string {
-    color: #98c379;
-}
-
-.code-comment {
-    color: #5c6370;
-    font-style: italic;
-}
+.code-keyword { color: #c678dd; }
+.code-class { color: #e5c07b; }
+.code-property { color: #e06c75; }
+.code-type { color: #e5c07b; }
+.code-string { color: #98c379; }
+.code-comment { color: #5c6370; font-style: italic; }
+.code-number { color: #d19a66; }
 
 .avatar-container {
     position: relative;
@@ -556,45 +525,6 @@ img {
 
 @keyframes spin {
     to { transform: rotate(360deg); }
-}
-
-/* Floating Badges */
-.floating-badge {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    gap: var(--space-sm);
-    padding: 10px 18px;
-    background: rgba(17, 17, 24, 0.9);
-    backdrop-filter: blur(20px);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-full);
-    font-size: 0.85rem;
-    font-weight: 600;
-    z-index: 3;
-    animation: badgeFloat 6s ease-in-out infinite;
-    box-shadow: var(--shadow-md);
-}
-
-.badge-1 {
-    top: 20px;
-    right: -10px;
-    animation-delay: 0s;
-}
-
-.badge-2 {
-    bottom: 30px;
-    left: -20px;
-    animation-delay: -3s;
-}
-
-@keyframes badgeFloat {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-}
-
-.badge-icon {
-    font-size: 1.1rem;
 }
 
 /* Scroll Indicator */
@@ -1227,8 +1157,7 @@ img {
         margin-right: auto;
     }
 
-    .code-card {
-        min-width: auto;
+    .code-window {
         max-width: 100%;
     }
 
@@ -1328,22 +1257,16 @@ img {
         font-size: 0.9rem;
     }
 
-    .floating-badge {
-        display: none;
+    .code-window {
+        font-size: 0.75rem;
     }
 
-    .code-card {
-        min-width: auto;
-        width: 100%;
+    .code-body {
+        padding: 20px 15px;
     }
 
-    .code-card-body {
-        padding: 20px 16px;
-        overflow-x: auto;
-    }
-
-    .code-card-body pre {
-        font-size: 0.8rem;
+    .code-body pre {
+        font-size: 0.75rem;
     }
 
     .scroll-indicator {
