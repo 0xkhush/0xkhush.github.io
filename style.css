@@ -427,6 +427,94 @@ img {
     align-items: center;
 }
 
+/* Code Card */
+.code-card {
+    background: linear-gradient(145deg, #1a1a2e 0%, #16162a 100%);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 60px rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    min-width: 380px;
+    max-width: 420px;
+}
+
+.code-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.window-controls {
+    display: flex;
+    gap: 8px;
+}
+
+.control {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.control-red {
+    background: #ff5f57;
+}
+
+.control-yellow {
+    background: #febc2e;
+}
+
+.control-green {
+    background: #28c840;
+}
+
+.code-filename {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.code-card-body {
+    padding: 28px 24px;
+}
+
+.code-card-body pre {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    line-height: 1.8;
+    white-space: pre;
+}
+
+.code-card-body code {
+    font-family: inherit;
+}
+
+.code-keyword {
+    color: #c678dd;
+    font-weight: 500;
+}
+
+.code-type {
+    color: #e5c07b;
+}
+
+.code-field {
+    color: #e06c75;
+}
+
+.code-string {
+    color: #98c379;
+}
+
+.code-comment {
+    color: #5c6370;
+    font-style: italic;
+}
+
 .avatar-container {
     position: relative;
     width: 340px;
@@ -1139,6 +1227,11 @@ img {
         margin-right: auto;
     }
 
+    .code-card {
+        min-width: auto;
+        max-width: 100%;
+    }
+
     .avatar-container {
         width: 260px;
         height: 260px;
@@ -1237,6 +1330,20 @@ img {
 
     .floating-badge {
         display: none;
+    }
+
+    .code-card {
+        min-width: auto;
+        width: 100%;
+    }
+
+    .code-card-body {
+        padding: 20px 16px;
+        overflow-x: auto;
+    }
+
+    .code-card-body pre {
+        font-size: 0.8rem;
     }
 
     .scroll-indicator {
