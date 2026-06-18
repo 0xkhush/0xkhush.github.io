@@ -251,6 +251,9 @@ function initPointerSpotlight() {
     let frameId = 0;
     let nextX = window.innerWidth / 2;
     let nextY = window.innerHeight / 2;
+    let lastMarkerAt = 0;
+    let markerStartX = nextX;
+    let markerStartY = nextY;
 
     window.addEventListener(
         "pointermove",
@@ -260,6 +263,13 @@ function initPointerSpotlight() {
             nextX = event.clientX;
             nextY = event.clientY;
             document.body.classList.add("is-pointer-active");
+
+            if (event.timeStamp - lastMarkerAt > 45) {
+                createCursorMarker(markerStartX, markerStartY, nextX, nextY);
+                lastMarkerAt = event.timeStamp;
+                markerStartX = nextX;
+                markerStartY = nextY;
+            }
 
             if (frameId) return;
 
@@ -275,6 +285,8 @@ function initPointerSpotlight() {
     document.documentElement.addEventListener("mouseleave", () => {
         document.body.classList.remove("is-pointer-active");
         document.body.classList.remove("is-cursor-interactive");
+        markerStartX = nextX;
+        markerStartY = nextY;
     });
 
     document.addEventListener("pointerover", (event) => {
@@ -296,6 +308,27 @@ function initPointerSpotlight() {
 
         document.body.classList.toggle("is-cursor-interactive", isStillInteractive);
     });
+}
+
+function createCursorMarker(startX, startY, endX, endY) {
+    const deltaX = endX - startX;
+    const deltaY = endY - startY;
+    const distance = Math.hypot(deltaX, deltaY);
+
+    if (distance < 6 || distance > 140) return;
+
+    const marker = document.createElement("span");
+    marker.className = "cursor-marker";
+    marker.setAttribute("aria-hidden", "true");
+    marker.style.left = `${startX}px`;
+    marker.style.top = `${startY}px`;
+    marker.style.setProperty("--marker-length", `${Math.min(distance, 72).toFixed(2)}px`);
+    marker.style.setProperty("--marker-angle", `${Math.atan2(deltaY, deltaX)}rad`);
+    document.body.appendChild(marker);
+
+    window.setTimeout(() => {
+        marker.remove();
+    }, 1900);
 }
 
 function initProjectMagnetism(container) {
