@@ -172,6 +172,15 @@ button {
     letter-spacing: -0.06em;
 }
 
+.intro-alias {
+    margin-left: 0.18em;
+    color: var(--text-soft);
+    font-size: 0.22em;
+    line-height: 1.1;
+    letter-spacing: 0.02em;
+    font-weight: 600;
+}
+
 .intro-role {
     margin: 2rem 0 0;
     color: var(--text-secondary);
