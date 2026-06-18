@@ -5,6 +5,8 @@
     --text-soft: #6b7387;
     --line: rgba(255, 255, 255, 0.16);
     --line-strong: rgba(255, 255, 255, 0.3);
+    --cursor-x: 50vw;
+    --cursor-y: 50vh;
 
     --font-sans: "Manrope", sans-serif;
     --font-mono: "IBM Plex Mono", monospace;
@@ -57,6 +59,92 @@ button {
 .site {
     position: relative;
     isolation: isolate;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    body.has-custom-cursor,
+    body.has-custom-cursor a,
+    body.has-custom-cursor button,
+    body.has-custom-cursor .project-preview,
+    body.has-custom-cursor .skill-item {
+        cursor: none;
+    }
+
+    .site::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        background:
+            radial-gradient(
+                circle at var(--cursor-x) var(--cursor-y),
+                rgba(164, 178, 236, 0.16) 0,
+                rgba(105, 122, 181, 0.08) 9rem,
+                transparent 22rem
+            );
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 360ms ease;
+    }
+
+    body.is-pointer-active .site::before {
+        opacity: 1;
+    }
+
+    .custom-cursor {
+        position: fixed;
+        left: var(--cursor-x);
+        top: var(--cursor-y);
+        z-index: 40;
+        width: 2.15rem;
+        height: 2.15rem;
+        border: 1px solid rgba(205, 214, 246, 0.42);
+        border-radius: 999px;
+        opacity: 0;
+        pointer-events: none;
+        transform: translate(-50%, -50%) scale(0.82);
+        transition:
+            width var(--transition),
+            height var(--transition),
+            border-color var(--transition),
+            background var(--transition),
+            opacity 180ms ease,
+            transform var(--transition);
+        mix-blend-mode: screen;
+    }
+
+    .custom-cursor::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0.32rem;
+        height: 0.32rem;
+        border-radius: 999px;
+        background: #f4f4f6;
+        box-shadow: 0 0 18px rgba(174, 188, 255, 0.72);
+        transform: translate(-50%, -50%);
+        transition:
+            opacity var(--transition),
+            transform var(--transition);
+    }
+
+    body.is-pointer-active .custom-cursor {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    body.is-cursor-interactive .custom-cursor {
+        width: 3rem;
+        height: 3rem;
+        border-color: rgba(232, 237, 255, 0.76);
+        background: rgba(162, 177, 238, 0.08);
+    }
+
+    body.is-cursor-interactive .custom-cursor::after {
+        opacity: 0.72;
+        transform: translate(-50%, -50%) scale(0.58);
+    }
 }
 
 .view {
@@ -298,6 +386,10 @@ button {
 }
 
 .project-preview {
+    --project-move-x: 0px;
+    --project-move-y: 0px;
+    --project-glow-x: 34%;
+    --project-glow-y: 50%;
     display: grid;
     gap: 0.55rem;
     width: 100%;
@@ -309,6 +401,7 @@ button {
     text-align: left;
     cursor: pointer;
     position: relative;
+    overflow: visible;
     isolation: isolate;
     transform-origin: left center;
     will-change: transform;
@@ -321,13 +414,34 @@ button {
         border-color var(--transition);
 }
 
+.project-preview::before {
+    content: "";
+    position: absolute;
+    inset: -0.85rem -1.1rem -0.85rem -0.7rem;
+    border-radius: 1.35rem;
+    background: linear-gradient(
+        105deg,
+        transparent 10%,
+        rgba(255, 255, 255, 0.12) 44%,
+        rgba(166, 181, 236, 0.2) 50%,
+        transparent 58%
+    );
+    opacity: 0;
+    transform: translateX(-18px);
+    transition:
+        opacity var(--transition),
+        transform var(--transition);
+    pointer-events: none;
+    z-index: -1;
+}
+
 .project-preview::after {
     content: "";
     position: absolute;
     inset: -1.15rem -1.5rem -1.15rem -1rem;
     border-radius: 1.5rem;
     background: radial-gradient(
-        circle at 34% 50%,
+        circle at var(--project-glow-x) var(--project-glow-y),
         rgba(138, 154, 210, 0.22) 0%,
         rgba(105, 122, 181, 0.16) 34%,
         rgba(64, 79, 129, 0.08) 56%,
@@ -351,8 +465,19 @@ button {
 .project-preview:focus-visible {
     color: #ffffff;
     border-left-color: var(--line-strong);
-    transform: translateX(9px) scale(1.036);
+    transform:
+        translate(
+            calc(9px + var(--project-move-x)),
+            var(--project-move-y)
+        )
+        scale(1.036);
     outline: none;
+}
+
+.project-preview:hover::before,
+.project-preview:focus-visible::before {
+    opacity: 1;
+    transform: translateX(12px);
 }
 
 .project-preview:hover::after,
@@ -457,19 +582,45 @@ button {
 .skill-item {
     display: inline-flex;
     align-items: center;
+    position: relative;
     color: var(--text-secondary);
+    cursor: default;
     transition:
         color var(--transition),
         text-shadow var(--transition),
         transform var(--transition);
 }
 
+.skill-item::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0.05em;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #d8e0f6, transparent);
+    opacity: 0;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition:
+        opacity var(--transition),
+        transform var(--transition);
+}
+
 .skill-item:hover,
-.skill-item:focus-visible {
+.skill-item:focus-visible,
+.skill-item:active {
     color: #d8e0f6;
     text-shadow: 0 0 16px rgba(132, 151, 211, 0.34);
     transform: translateY(-1px);
     outline: none;
+}
+
+.skill-item:hover::after,
+.skill-item:focus-visible::after,
+.skill-item:active::after {
+    opacity: 1;
+    transform: scaleX(1);
 }
 
 .view-projects {
@@ -504,6 +655,10 @@ button {
 .project-display {
     max-width: 72rem;
     padding: clamp(2.8rem, 7vh, 5.5rem) 0;
+}
+
+.project-display.is-changing {
+    animation: project-change 360ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .project-year {
@@ -671,6 +826,19 @@ button {
     }
     to {
         background-position: -120% 50%;
+    }
+}
+
+@keyframes project-change {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+        filter: blur(4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
     }
 }
 

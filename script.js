@@ -48,6 +48,7 @@ const projects = [
 const state = {
     activeProject: 0,
     view: "home",
+    hasRenderedProject: false,
 };
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -76,6 +77,8 @@ document.addEventListener("DOMContentLoaded", () => {
     renderProjectCount(elements);
     renderProject(elements, state.activeProject);
     bindEvents(elements);
+    initPointerSpotlight();
+    initProjectMagnetism(elements.previewList);
 
     if (window.location.hash === "#projects") {
         setView(elements, "projects");
@@ -179,6 +182,7 @@ function renderProject(elements, index) {
     const total = projects.length;
     const nextIndex = (index + total) % total;
     const project = projects[nextIndex];
+    const shouldAnimate = state.hasRenderedProject && !prefersReducedMotion();
 
     state.activeProject = nextIndex;
 
@@ -192,6 +196,12 @@ function renderProject(elements, index) {
     syncLink(elements.secondaryLink, project.secondaryLink, project.secondaryLabel, "↗");
 
     updateDotState(elements.projectDots, nextIndex);
+
+    if (shouldAnimate) {
+        animateProjectDisplay(elements.projectDisplay);
+    }
+
+    state.hasRenderedProject = true;
 }
 
 function syncLink(element, href, label, suffix) {
@@ -214,6 +224,125 @@ function updateDotState(container, activeIndex) {
         dot.classList.toggle("is-active", index === activeIndex);
         dot.setAttribute("aria-current", index === activeIndex ? "true" : "false");
     });
+}
+
+function animateProjectDisplay(element) {
+    element.classList.remove("is-changing");
+    void element.offsetWidth;
+    element.classList.add("is-changing");
+    element.addEventListener(
+        "animationend",
+        () => {
+            element.classList.remove("is-changing");
+        },
+        { once: true }
+    );
+}
+
+function initPointerSpotlight() {
+    if (!canUseFinePointerMotion()) return;
+
+    const cursor = document.createElement("div");
+    cursor.className = "custom-cursor";
+    cursor.setAttribute("aria-hidden", "true");
+    document.body.appendChild(cursor);
+    document.body.classList.add("has-custom-cursor");
+
+    let frameId = 0;
+    let nextX = window.innerWidth / 2;
+    let nextY = window.innerHeight / 2;
+
+    window.addEventListener(
+        "pointermove",
+        (event) => {
+            if (event.pointerType !== "mouse") return;
+
+            nextX = event.clientX;
+            nextY = event.clientY;
+            document.body.classList.add("is-pointer-active");
+
+            if (frameId) return;
+
+            frameId = requestAnimationFrame(() => {
+                document.documentElement.style.setProperty("--cursor-x", `${nextX}px`);
+                document.documentElement.style.setProperty("--cursor-y", `${nextY}px`);
+                frameId = 0;
+            });
+        },
+        { passive: true }
+    );
+
+    document.documentElement.addEventListener("mouseleave", () => {
+        document.body.classList.remove("is-pointer-active");
+        document.body.classList.remove("is-cursor-interactive");
+    });
+
+    document.addEventListener("pointerover", (event) => {
+        if (event.pointerType !== "mouse") return;
+
+        document.body.classList.toggle(
+            "is-cursor-interactive",
+            Boolean(event.target.closest("a, button, .project-preview, .skill-item"))
+        );
+    });
+
+    document.addEventListener("pointerout", (event) => {
+        if (event.pointerType !== "mouse") return;
+
+        const nextTarget = event.relatedTarget;
+        const isStillInteractive =
+            nextTarget instanceof Element &&
+            Boolean(nextTarget.closest("a, button, .project-preview, .skill-item"));
+
+        document.body.classList.toggle("is-cursor-interactive", isStillInteractive);
+    });
+}
+
+function initProjectMagnetism(container) {
+    if (!canUseFinePointerMotion()) return;
+
+    container.addEventListener(
+        "pointermove",
+        (event) => {
+            if (event.pointerType !== "mouse") return;
+
+            const preview = event.target.closest(".project-preview");
+            if (!preview || !container.contains(preview)) return;
+
+            const rect = preview.getBoundingClientRect();
+            const x = (event.clientX - rect.left) / rect.width;
+            const y = (event.clientY - rect.top) / rect.height;
+            const moveX = (x - 0.5) * 8;
+            const moveY = (y - 0.5) * 5;
+
+            preview.style.setProperty("--project-move-x", `${moveX.toFixed(2)}px`);
+            preview.style.setProperty("--project-move-y", `${moveY.toFixed(2)}px`);
+            preview.style.setProperty("--project-glow-x", `${(x * 100).toFixed(1)}%`);
+            preview.style.setProperty("--project-glow-y", `${(y * 100).toFixed(1)}%`);
+        },
+        { passive: true }
+    );
+
+    container.addEventListener("pointerout", (event) => {
+        const preview = event.target.closest(".project-preview");
+        if (!preview || preview.contains(event.relatedTarget)) return;
+
+        preview.style.removeProperty("--project-move-x");
+        preview.style.removeProperty("--project-move-y");
+        preview.style.removeProperty("--project-glow-x");
+        preview.style.removeProperty("--project-glow-y");
+    });
+}
+
+function canUseFinePointerMotion() {
+    return (
+        window.matchMedia("(hover: hover) and (pointer: fine)").matches &&
+        !prefersReducedMotion()
+    );
+}
+
+function prefersReducedMotion() {
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
 function setView(elements, view) {
