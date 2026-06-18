@@ -1,202 +1,239 @@
-// ===== DOM READY =====
-document.addEventListener('DOMContentLoaded', () => {
-    initNavbar();
-    initScrollReveal();
-    initSmoothScroll();
-    initMobileNav();
-    initCursorGlow();
-});
+const projects = [
+    {
+        year: "2026",
+        title: "Portfolio Website",
+        stack: ["HTML", "CSS", "JavaScript"],
+        description:
+            "A lightweight personal portfolio built without a framework. The focus is sharp typography, responsive layout, and a minimal interaction model that lets the work speak clearly.",
+        primaryLink: "https://0xkhush.in",
+        primaryLabel: "View project",
+        secondaryLink: "https://github.com/0xkhush/0xkhush.github.io",
+        secondaryLabel: "Source code",
+    },
+    {
+        year: "2026",
+        title: "Focus",
+        stack: ["JavaScript", "Chrome API", "CSS"],
+        description:
+            "A browser extension that filters distracting YouTube elements in real time. It uses DOM interception and asynchronous JavaScript to create a cleaner, more focused viewing experience.",
+        primaryLink: "https://github.com/0xkhush/focus",
+        primaryLabel: "Open repository",
+        secondaryLink: "",
+        secondaryLabel: "",
+    },
+    {
+        year: "2026",
+        title: "yt-filter-api",
+        stack: ["Python", "Machine Learning", "API"],
+        description:
+            "YouTube Content Classifier API is a lightweight Python API that classifies YouTube videos as constructive (\"yes\") or non-constructive (\"no\") using Machine Learning trained on 9,000+ yt videos. It is optimized for low-resource environments and built to power browser extensions and productivity tools.",
+        primaryLink: "https://github.com/0xkhush/yt-filter-api",
+        primaryLabel: "Open repository",
+        secondaryLink: "",
+        secondaryLabel: "",
+    },
+    {
+        year: "Ongoing",
+        title: "Open Source Contributions",
+        stack: ["GitHub", "Community", "Collaboration"],
+        description:
+            "An ongoing body of public collaboration across repositories, discussions, and learning-in-public efforts. The goal is steady contribution, sharper engineering habits, and meaningful community work.",
+        primaryLink: "https://github.com/0xkhush",
+        primaryLabel: "View GitHub",
+        secondaryLink: "",
+        secondaryLabel: "",
+    },
+];
 
-// ===== NAVBAR =====
-function initNavbar() {
-    const navbar = document.getElementById('navbar');
-    let lastScroll = 0;
+const state = {
+    activeProject: 0,
+    view: "home",
+};
 
-    window.addEventListener('scroll', () => {
-        const currentScroll = window.scrollY;
-
-        if (currentScroll > 50) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
-
-        lastScroll = currentScroll;
-    });
-}
-
-// ===== MOBILE NAV =====
-function initMobileNav() {
-    const toggle = document.getElementById('nav-toggle');
-    const links = document.getElementById('nav-links');
-
-    if (!toggle || !links) return;
-
-    toggle.addEventListener('click', () => {
-        toggle.classList.toggle('active');
-        links.classList.toggle('active');
-    });
-
-    // Close on link click
-    links.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-            toggle.classList.remove('active');
-            links.classList.remove('active');
-        });
-    });
-}
-
-// ===== SCROLL REVEAL =====
-function initScrollReveal() {
-    // Add reveal classes to sections and elements
-    const elementsToReveal = [
-        { selector: '.section-header', class: 'reveal' },
-        { selector: '.about-text', class: 'reveal-left' },
-        { selector: '.about-stats', class: 'reveal-right' },
-        { selector: '.skills-grid', class: 'stagger-children' },
-        { selector: '.projects-grid', class: 'stagger-children' },
-        { selector: '.leadership-grid', class: 'stagger-children' },
-        { selector: '.contact-lead', class: 'reveal' },
-        { selector: '.contact-cards', class: 'stagger-children' },
-        { selector: '.projects-cta', class: 'reveal' },
-    ];
-
-    elementsToReveal.forEach(({ selector, class: className }) => {
-        document.querySelectorAll(selector).forEach(el => {
-            el.classList.add(className);
-        });
-    });
-
-    // Create Intersection Observer
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px 0px -80px 0px',
-        threshold: 0.1,
+document.addEventListener("DOMContentLoaded", () => {
+    const elements = {
+        site: document.getElementById("site"),
+        homeView: document.getElementById("home-view"),
+        projectsView: document.getElementById("projects-view"),
+        previewList: document.getElementById("project-preview-list"),
+        projectCount: document.getElementById("project-count"),
+        openProjects: document.getElementById("open-projects"),
+        closeProjects: document.getElementById("close-projects"),
+        prevProject: document.getElementById("prev-project"),
+        nextProject: document.getElementById("next-project"),
+        projectYear: document.getElementById("project-year"),
+        projectTitle: document.getElementById("project-title"),
+        projectStack: document.getElementById("project-stack"),
+        projectDescription: document.getElementById("project-description"),
+        primaryLink: document.getElementById("project-primary-link"),
+        secondaryLink: document.getElementById("project-secondary-link"),
+        projectNote: document.getElementById("project-note"),
+        projectDots: document.getElementById("project-dots"),
     };
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                // Optionally stop observing after reveal
-                // observer.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
+    renderPreviewList(elements);
+    renderProjectDots(elements);
+    renderProjectCount(elements);
+    renderProject(elements, state.activeProject);
+    bindEvents(elements);
 
-    // Observe all reveal elements
-    document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .stagger-children').forEach(el => {
-        observer.observe(el);
-    });
-}
-
-// ===== SMOOTH SCROLL =====
-function initSmoothScroll() {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                const navHeight = document.getElementById('navbar').offsetHeight;
-                const targetPosition = target.getBoundingClientRect().top + window.scrollY - navHeight - 20;
-
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-}
-
-// ===== SUBTLE CURSOR GLOW (only desktop) =====
-function initCursorGlow() {
-    if (window.matchMedia('(pointer: coarse)').matches) return;
-
-    const glow = document.createElement('div');
-    glow.style.cssText = `
-        position: fixed;
-        width: 300px;
-        height: 300px;
-        border-radius: 50%;
-        background: radial-gradient(circle, rgba(99, 102, 241, 0.06), transparent 70%);
-        pointer-events: none;
-        z-index: 0;
-        transition: transform 0.15s ease;
-        will-change: transform;
-    `;
-    document.body.appendChild(glow);
-
-    let mouseX = 0, mouseY = 0;
-    let glowX = 0, glowY = 0;
-
-    document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-    });
-
-    function animate() {
-        glowX += (mouseX - glowX) * 0.08;
-        glowY += (mouseY - glowY) * 0.08;
-        glow.style.transform = `translate(${glowX - 150}px, ${glowY - 150}px)`;
-        requestAnimationFrame(animate);
+    if (window.location.hash === "#projects") {
+        setView(elements, "projects");
     }
-    animate();
-}
-
-// ===== ACTIVE NAV LINK HIGHLIGHTING =====
-window.addEventListener('scroll', () => {
-    const sections = document.querySelectorAll('.section, .hero');
-    const navLinks = document.querySelectorAll('.nav-link');
-    const navHeight = document.getElementById('navbar').offsetHeight;
-
-    let current = '';
-
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop - navHeight - 100;
-        if (window.scrollY >= sectionTop) {
-            current = section.getAttribute('id');
-        }
-    });
-
-    navLinks.forEach(link => {
-        link.style.color = '';
-        if (link.getAttribute('href') === `#${current}`) {
-            link.style.color = 'var(--accent-primary)';
-        }
-    });
 });
 
-// ===== TYPEWRITER EFFECT FOR TAGLINE (subtle) =====
-(function() {
-    const tagline = document.querySelector('.hero-tagline');
-    if (!tagline) return;
+function bindEvents(elements) {
+    elements.openProjects.addEventListener("click", () => {
+        setView(elements, "projects");
+    });
 
-    // Add a blinking cursor
-    const cursor = document.createElement('span');
-    cursor.textContent = '|';
-    cursor.style.cssText = `
-        color: var(--accent-primary);
-        font-weight: 300;
-        animation: cursorBlink 1s ease-in-out infinite;
-        margin-left: 2px;
-    `;
-    tagline.appendChild(cursor);
+    elements.closeProjects.addEventListener("click", () => {
+        setView(elements, "home");
+    });
 
-    // Add cursor blink animation
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes cursorBlink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
+    elements.prevProject.addEventListener("click", () => {
+        renderProject(elements, state.activeProject - 1);
+    });
+
+    elements.nextProject.addEventListener("click", () => {
+        renderProject(elements, state.activeProject + 1);
+    });
+
+    document.addEventListener("keydown", (event) => {
+        if (state.view !== "projects") return;
+
+        if (event.key === "ArrowLeft") {
+            renderProject(elements, state.activeProject - 1);
         }
-    `;
-    document.head.appendChild(style);
 
-    // Remove cursor after 3 seconds
-    setTimeout(() => {
-        cursor.style.transition = 'opacity 0.5s';
-        cursor.style.opacity = '0';
-        setTimeout(() => cursor.remove(), 500);
-    }, 3000);
-})();
+        if (event.key === "ArrowRight") {
+            renderProject(elements, state.activeProject + 1);
+        }
+
+        if (event.key === "Escape") {
+            setView(elements, "home");
+        }
+    });
+
+    window.addEventListener("hashchange", () => {
+        if (window.location.hash === "#projects") {
+            setView(elements, "projects");
+            return;
+        }
+
+        if (state.view === "projects") {
+            setView(elements, "home");
+        }
+    });
+}
+
+function renderProjectCount(elements) {
+    elements.projectCount.textContent = `${String(projects.length).padStart(2, "0")} projects`;
+}
+
+function renderPreviewList(elements) {
+    const fragment = document.createDocumentFragment();
+    const previewProjects = projects.slice(0, 3);
+
+    previewProjects.forEach((project, index) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "project-preview";
+        button.dataset.index = String(index);
+        button.innerHTML = `
+            <span class="project-preview-title">${project.title}</span>
+            <span class="project-preview-stack">${project.stack.join(" / ")}</span>
+        `;
+
+        button.addEventListener("click", () => {
+            renderProject(elements, index);
+            setView(elements, "projects");
+        });
+
+        fragment.appendChild(button);
+    });
+
+    elements.previewList.replaceChildren(fragment);
+}
+
+function renderProjectDots(elements) {
+    const fragment = document.createDocumentFragment();
+
+    projects.forEach((project, index) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "project-dot";
+        button.setAttribute("aria-label", `Open ${project.title}`);
+
+        button.addEventListener("click", () => {
+            renderProject(elements, index);
+        });
+
+        fragment.appendChild(button);
+    });
+
+    elements.projectDots.replaceChildren(fragment);
+}
+
+function renderProject(elements, index) {
+    const total = projects.length;
+    const nextIndex = (index + total) % total;
+    const project = projects[nextIndex];
+
+    state.activeProject = nextIndex;
+
+    elements.projectYear.textContent = project.year || `Project ${String(nextIndex + 1).padStart(2, "0")}`;
+    elements.projectTitle.textContent = project.title;
+    elements.projectStack.textContent = project.stack.join(" / ");
+    elements.projectDescription.textContent = project.description;
+    elements.projectNote.textContent = project.note || "";
+
+    syncLink(elements.primaryLink, project.primaryLink, project.primaryLabel, "→");
+    syncLink(elements.secondaryLink, project.secondaryLink, project.secondaryLabel, "↗");
+
+    updateDotState(elements.projectDots, nextIndex);
+}
+
+function syncLink(element, href, label, suffix) {
+    if (!href || !label) {
+        element.hidden = true;
+        element.removeAttribute("href");
+        element.textContent = "";
+        return;
+    }
+
+    element.hidden = false;
+    element.href = href;
+    element.textContent = `${label} ${suffix}`;
+}
+
+function updateDotState(container, activeIndex) {
+    const dots = container.querySelectorAll(".project-dot");
+
+    dots.forEach((dot, index) => {
+        dot.classList.toggle("is-active", index === activeIndex);
+        dot.setAttribute("aria-current", index === activeIndex ? "true" : "false");
+    });
+}
+
+function setView(elements, view) {
+    state.view = view;
+    elements.site.dataset.view = view;
+
+    const showProjects = view === "projects";
+    document.body.classList.toggle("projects-open", showProjects);
+    elements.projectsView.setAttribute("aria-hidden", String(!showProjects));
+    elements.homeView.setAttribute("aria-hidden", String(showProjects));
+
+    if (showProjects) {
+        window.location.hash = "projects";
+        elements.closeProjects.focus({ preventScroll: true });
+        return;
+    }
+
+    if (window.location.hash === "#projects") {
+        history.replaceState(null, "", `${window.location.pathname}${window.location.search}`);
+    }
+
+    elements.openProjects.focus({ preventScroll: true });
+}

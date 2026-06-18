@@ -1,33 +1,24 @@
 # 0xkhush.github.io
 
-Personal portfolio website of **0xkhush** (Khushvendra Singh) — a software developer focused on backend development, DSA, and open-source.
+Minimal portfolio website for **Khushvendra Singh** built with plain HTML, CSS, and JavaScript.
 
-🌐 **Live:** [0xkhush.in](https://0xkhush.github.io)
+## Live
 
----
+[0xkhush.in](https://0xkhush.in)
 
 ## Stack
 
-Pure HTML · CSS · Vanilla JavaScript — no frameworks, no build step.
+- HTML
+- CSS
+- Vanilla JavaScript
 
----
+## Experience
 
-## Sections
+- Single-screen landing layout with intro, social links, work preview, and skills
+- Full-screen projects viewer opened from `View all projects`
+- Project navigation with dots, previous/next controls, and back action
+- Responsive dark theme with minimal motion
 
-- **Hero** — Introduction with social links (GitHub, LinkedIn, Codeforces, Email)
-- **About** — Background and interests
-- **Skills** — Languages, Backend, DSA & CS, Tools
-- **Projects** — YouTube Filtering Extension, Bank Management System, LearnGo, Portfolio
-- **Leadership** — ACM-VIT Core Committee Member
-- **Contact** — Ways to reach out
+## Project Data
 
----
-
-## Connect
-
-| Platform | Link |
-|----------|------|
-| GitHub | [@0xkhush](https://github.com/0xkhush) |
-| LinkedIn | [Khushvendra Singh](https://www.linkedin.com/in/khushvendra-singh/) |
-| Codeforces | [0xkhush](https://codeforces.com/profile/0xkhush) |
-| Email | 0xkhush@gmail.com |
+The project list is defined in [script.js](/Users/khush/portfolio_website/repo/script.js) so the home preview and full project viewer stay in sync.
