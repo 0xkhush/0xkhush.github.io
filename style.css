@@ -181,6 +181,24 @@ button {
     font-weight: 600;
 }
 
+.intro-handle {
+    display: inline-block;
+    background: linear-gradient(
+        90deg,
+        #8c96ae 0%,
+        #ffffff 35%,
+        #aebcff 50%,
+        #ffffff 65%,
+        #8c96ae 100%
+    );
+    background-size: 240% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 18px rgba(160, 176, 255, 0.28);
+    animation: handle-glow 2.8s linear infinite;
+}
+
 .intro-role {
     margin: 2rem 0 0;
     color: var(--text-secondary);
@@ -644,6 +662,15 @@ button {
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+@keyframes handle-glow {
+    from {
+        background-position: 120% 50%;
+    }
+    to {
+        background-position: -120% 50%;
     }
 }
 
