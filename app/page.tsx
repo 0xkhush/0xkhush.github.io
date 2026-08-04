@@ -5,38 +5,47 @@ import { useEffect, useState } from "react";
 const projects = [
   {
     id: "01",
-    year: "2026",
-    name: "Focus",
-    type: "Chrome extension / distraction control",
-    stack: ["JavaScript", "Chrome API", "DOM"],
-    note: "01 // Rewired YouTube’s interface to remove distraction at the point of attention.",
-    href: "https://github.com/0xkhush/focus",
+    year: "NOW",
+    name: "0xEngine",
+    type: "Systems project / multi-language build",
+    stack: ["Go", "Python", "JavaScript"],
+    note: "01 // A systems project built across Go, Python, and JavaScript. Work in progress, built in the open.",
+    href: "https://github.com/0xkhush/0xEngine",
   },
   {
     id: "02",
     year: "2026",
-    name: "yt-filter-api",
-    type: "ML classifier / productivity infra",
-    stack: ["Python", "ML", "API"],
-    note: "02 // A lean classifier for deciding whether a YouTube video earns the next click.",
-    href: "https://github.com/0xkhush/yt-filter-api",
+    name: "Focus",
+    type: "Chrome extension / distraction control",
+    stack: ["JavaScript", "Chrome API", "DOM"],
+    note: "02 // Rewired YouTube’s interface to remove distraction at the point of attention.",
+    href: "https://github.com/0xkhush/focus",
   },
   {
     id: "03",
+    year: "2026",
+    name: "yt-filter-api",
+    type: "ML classifier / productivity infra",
+    stack: ["Python", "ML", "API"],
+    note: "03 // A lean classifier for deciding whether a YouTube video earns the next click.",
+    href: "https://github.com/0xkhush/yt-filter-api",
+  },
+  {
+    id: "04",
     year: "NOW",
     name: "Open Source",
     type: "Public work / engineering in the open",
     stack: ["GitHub", "Community", "Shipping"],
-    note: "03 // Experiments, contributions, and the unglamorous iteration that makes systems better.",
+    note: "04 // Experiments, contributions, and the unglamorous iteration that makes systems better.",
     href: "https://github.com/0xkhush",
   },
   {
-    id: "04",
+    id: "05",
     year: "2026",
     name: "0xkhush.in",
     type: "Portfolio / interface experiment",
     stack: ["React", "TypeScript", "CSS"],
-    note: "04 // This site: a signal, not a résumé. Built to move, inspect, and evolve.",
+    note: "05 // This site: a signal, not a résumé. Built to move, inspect, and evolve.",
     href: "https://0xkhush.in",
   },
 ];
@@ -96,7 +105,7 @@ export default function Home() {
       </section>
 
       <section className="work" id="work" aria-labelledby="work-title">
-        <div className="section-line"><span>SELECTED WORK</span><span>04 PROJECTS / 2026</span></div>
+        <div className="section-line"><span>SELECTED WORK</span><span>05 PROJECTS / 2026</span></div>
         <div className="work-layout">
           <div>
             <h2 id="work-title">PROJECT<br /><em>ROSTER</em></h2>
@@ -130,7 +139,7 @@ export default function Home() {
       </section>
 
       <footer>
-        <div><p>EST. 2026 / DELHI, IN</p><h2>LET&apos;S BUILD<br /><em>SOMETHING</em>.</h2></div>
+        <div className="footer-intro"><p>EST. 2026 / DELHI, IN</p><h2>LET&apos;S BUILD<br /><em>SOMETHING</em>.</h2></div>
         <div className="socials">
           <a href="mailto:0xkhush@gmail.com">0xkhush@gmail.com ↗</a>
           {links.map(([short, label, href]) => <a key={short} href={href} target="_blank" rel="noreferrer"><span>{short}</span>{label} ↗</a>)}
