@@ -98,7 +98,7 @@ export default function Home() {
         <p>// FIELD NOTES</p>
         <div className="statement">SYSTEMS THAT <span>THINK.</span><br />TOOLS THAT <span>MOVE.</span></div>
         <div className="skill-grid">
-          {["Python", "Go", "C++", "JavaScript", "REST APIs", "LLM / RAG", "MongoDB", "Linux"].map((skill, index) => (
+          {["Python", "Go", "C++", "Weaviate", "REST APIs", "LLM / RAG", "MongoDB", "Linux"].map((skill, index) => (
             <span key={skill}><b>{String(index + 1).padStart(2, "0")}</b>{skill}</span>
           ))}
         </div>
