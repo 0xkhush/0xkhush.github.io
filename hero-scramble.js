@@ -2,6 +2,11 @@ const scrambleLetters = document.querySelectorAll("[data-scramble]");
 const scrambleCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#$%&*";
 
 if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  scrambleLetters.forEach((letterGroup) => {
+    letterGroup.style.display = "inline-block";
+    letterGroup.style.width = `${letterGroup.getBoundingClientRect().width}px`;
+  });
+
   const duration = 900;
   const characterStep = 90;
   const startedAt = performance.now();
