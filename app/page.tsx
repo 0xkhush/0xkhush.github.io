@@ -78,7 +78,7 @@ export default function Home() {
     <main>
       <div className="grain" aria-hidden="true" />
       <header className="topbar">
-        <a className="brand" href="#top" aria-label="0xkhush home">0XKHUSH<span>_</span></a>
+        <a className="brand" href="#top" aria-label="0xkhush home"><span>_</span>0xkhush<span>_</span></a>
         <p className="system-state"><i /> SYSTEM / ONLINE</p>
         <a className="mail-link" href="mailto:0xkhush@gmail.com">EMAIL ↗</a>
       </header>
