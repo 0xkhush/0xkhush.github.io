@@ -12,6 +12,8 @@
   <style>footer h2 em{color:#090909}.typing-line{display:inline-block;min-height:.66em}.typing-cursor{display:inline-block;width:.07em;height:.72em;margin-left:.06em;background:#090909;vertical-align:-.03em;animation:cursor-blink .7s step-end infinite}@keyframes cursor-blink{50%{opacity:0}}@media(prefers-reduced-motion:reduce){.typing-cursor{animation:none}}</style>
   <style>main{background-image:none}.fixed-grid{position:fixed;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(255,255,255,.075) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.075) 1px,transparent 1px);background-size:48px 48px}main>*:not(.grain):not(.fixed-grid){position:relative;z-index:1}</style>
   <style>.topbar,.hero,.manifesto,footer{border:0}.section-line,.project-list,.project-row,.project-detail,.detail-bottom,.terminal,.terminal-bar,.socials a{border:0}</style>
+  <style>main{overflow:clip}.manifesto{display:block;min-height:230vh;padding:0;position:relative}.manifesto-pin{position:sticky;top:0;min-height:100vh;padding:12vh 4vw;display:grid;grid-template-columns:1fr 3fr;gap:4vw;align-content:start}.field-notes,.statement-line,.skill-grid{opacity:0;transform:translateY(44px);transition:opacity .5s ease,transform .65s cubic-bezier(.2,.8,.2,1)}.manifesto.is-field .field-notes,.manifesto.is-statement .statement-line:first-child,.manifesto.is-statement .statement-line:nth-child(2),.manifesto.is-skills .skill-grid{opacity:1;transform:none}.statement .statement-line{display:block;color:var(--paper)}.statement .statement-line b{color:var(--orange)}.manifesto.is-statement .statement-line:nth-child(2){transition-delay:.17s}.skill-grid span{opacity:0;transform:translateY(24px);transition:opacity .35s ease,transform .45s cubic-bezier(.2,.8,.2,1)}.manifesto.is-skills .skill-grid span{opacity:1;transform:none}.manifesto.is-skills .skill-grid span:nth-child(2){transition-delay:.06s}.manifesto.is-skills .skill-grid span:nth-child(3){transition-delay:.12s}.manifesto.is-skills .skill-grid span:nth-child(4){transition-delay:.18s}.manifesto.is-skills .skill-grid span:nth-child(5){transition-delay:.24s}.manifesto.is-skills .skill-grid span:nth-child(6){transition-delay:.3s}.manifesto.is-skills .skill-grid span:nth-child(7){transition-delay:.36s}.manifesto.is-skills .skill-grid span:nth-child(8){transition-delay:.42s}@media(max-width:700px){.manifesto{min-height:210vh}.manifesto-pin{display:block;padding:10vh 18px}.manifesto .field-notes{margin-bottom:7vh}}@media(prefers-reduced-motion:reduce){.field-notes,.statement-line,.skill-grid,.skill-grid span{transition:none!important}}</style>
+  <style>#work .section-line,#work .work-layout,#work .project-detail{opacity:0;transform:translateY(38px);transition:opacity .45s ease,transform .6s cubic-bezier(.2,.8,.2,1)}#work.is-revealed .section-line,#work.is-revealed .work-layout,#work.is-revealed .project-detail{opacity:1;transform:none}#work.is-revealed .work-layout{transition-delay:.12s}#work.is-revealed .project-detail{transition-delay:.24s}@media(prefers-reduced-motion:reduce){#work .section-line,#work .work-layout,#work .project-detail{transition:none;opacity:1;transform:none}}</style>
 </head>
 <body>
   <main>
@@ -25,16 +27,18 @@
 
     <section class="hero" id="top" aria-labelledby="hero-title">
       <div class="hero-kicker">[ KHV-001 ] // SOFTWARE DEVELOPER + BACKEND AI ENGINEER</div>
-      <h1 id="hero-title">CODE<br>IN <em>MOTION</em><span class="title-block"></span></h1>
+      <h1 id="hero-title"><span data-scramble="CODE">CODE</span><br><span data-scramble="IN">IN</span> <em data-scramble="MOTION">MOTION</em><span class="title-block"></span></h1>
       <div class="hero-sidecopy"><p>Khushvendra Singh builds backend systems, useful tools, and experiments that ship.</p><a href="#work">EXPLORE WORK <b>↓</b></a></div>
       <div class="coordinates">28.6139° N<br>77.2090° E<br><span>INDIA / REMOTE</span></div>
       <div class="hero-mark" aria-hidden="true">✳</div>
     </section>
 
     <section class="manifesto" aria-label="Core skills">
-      <p>// FIELD NOTES</p>
-      <div class="statement">SYSTEMS THAT <span>THINK.</span><br>TOOLS THAT <span>MOVE.</span></div>
-      <div class="skill-grid"><span><b>01</b>Python</span><span><b>02</b>Go</span><span><b>03</b>C++</span><span><b>04</b>Weaviate</span><span><b>05</b>REST APIs</span><span><b>06</b>LLM / RAG</span><span><b>07</b>MongoDB</span><span><b>08</b>Linux</span></div>
+      <div class="manifesto-pin">
+        <p class="field-notes">// FIELD NOTES</p>
+        <div class="statement"><span class="statement-line">SYSTEMS THAT <b>THINK.</b></span><span class="statement-line">TOOLS THAT <b>MOVE.</b></span></div>
+        <div class="skill-grid"><span><b>01</b>Python</span><span><b>02</b>Go</span><span><b>03</b>C++</span><span><b>04</b>Weaviate</span><span><b>05</b>REST APIs</span><span><b>06</b>LLM / RAG</span><span><b>07</b>MongoDB</span><span><b>08</b>Linux</span></div>
+      </div>
     </section>
 
     <section class="work" id="work" aria-labelledby="work-title">
@@ -48,7 +52,10 @@
     <footer><div class="footer-intro"><p>EST. 2026 / DELHI, IN</p><h2 aria-label="Let's build something."><span class="typing-line" data-typing="LET'S BUILD" aria-hidden="true"></span><br><em class="typing-line" data-typing="SOMETHING." aria-hidden="true"></em></h2></div><div class="socials"><a href="mailto:0xkhush@gmail.com">0xkhush@gmail.com ↗</a><a href="https://github.com/0xkhush" target="_blank" rel="noreferrer"><span>GH</span>GitHub ↗</a><a href="https://www.linkedin.com/in/khushvendra-singh/" target="_blank" rel="noreferrer"><span>IN</span>LinkedIn ↗</a><a href="https://codeforces.com/profile/0xkhush" target="_blank" rel="noreferrer"><span>CF</span>Codeforces ↗</a></div><p class="footer-code">// NO TEMPLATES. NO NOISE.<br>JUST WORK IN MOTION.</p></footer>
   </main>
   <script src="script.js"></script>
+  <script src="hero-scramble.js"></script>
+  <script src="manifesto-scroll.js"></script>
   <script src="project-type.js"></script>
+  <script src="work-reveal.js"></script>
   <script src="footer-type.js"></script>
 </body>
 </html>
